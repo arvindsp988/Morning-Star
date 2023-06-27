@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="navOsama.css" />
+    <link rel="stylesheet" href="styles/detal_osama.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/styles/footer.css">
+    <title>Document</title>
+  </head>
+
+
+
+
+  <body>
+    <nav id="navbar" class="container"></nav>
+
+    <div id="parent">
+
+    </div>
+    <div id="newsLetter">
+      <a href="https://www.zara.com/in/en/z-newsletter-nl1400.html?v1=11110"><h3 id="heading">JOIN OUR NEWSLETTER</h3></a>
+      </div>
+    
+      <div id="socials">
+      <a href="https://www.instagram.com/zara/"><h6>INSTAGRAM</h6></a>
+      <a href="https://www.facebook.com/Zara"> <h6>FACEBOOK</h6><a>
+      <a href="https://twitter.com/ZARA"><h6>TWITTER</h6><a>
+      <a href="https://www.pinterest.es/zaraofficial/"><h6>PINTEREST</h6><a>
+      <a href="https://www.youtube.com/user/zara"><h6>YOUTUBE</h6><a>
+      <a href="https://open.spotify.com/user/r6ivwuv0ebk346hhxo446pbfv"><h6>SPOTIFY</h6><a>
+     </div>
+    
+      <div id="bottom">
+          NAME AND ADDRESS OF THE MANUFACTURER:
+          <br> INDUSTRIA DE DISEÑO TEXTIL, S.A. (INDITEX, S.A.)
+          <br>AVENIDA DE LA DIPUTACIÓN, EDIFICIO INDITEX, 15143, ARTEIXO (A CORUÑA),
+            SPAIN
+          </h6>
+        </div>
+        <div class="copyright">
+          No © copyright issues
+        </div>
+  </body>
+</html>
+<script>
+  let item = JSON.parse(localStorage.getItem("show_product"));
+  // console.log(item);
+
+  function cart() {
+    console.log(item);
+    let avail=JSON.parse(localStorage.getItem("cart_data"))
+    if(avail){
+
+      localStorage.setItem("cart_data",JSON.stringify([...avail,item]))
+    }else{
+      localStorage.setItem("cart_data",JSON.stringify([item]))
+
+    }
+  
+    window.location.href = "cart.html";
+
+  }
+
+  function showmens() {
+    localStorage.setItem("current_page", "mens");
+    window.location.href = "index.html";
+  }
+
+  function showwomens() {
+    localStorage.setItem("current_page", "women");
+    window.location.href = "index.html";
+  }
+
+  function showkids() {
+    localStorage.setItem("current_page", "kids");
+    window.location.href = "index.html";
+  }
+
+
+  let parent = document.getElementById("parent");
+  function display(data) {
+    // console.log(data);
+
+    parent.innerHTML = `
+<div class="child-div content">
+        <div class="details"><h2>MATERIAL,CARE AND ORIGIN</h2>
+        </div>
+        <p>
+          ${data.detail}
+        </p>
+      </div>
+      <div class="image_box">
+        <div class="image_container">
+          <div class="img-box minbox">
+            <img
+              class="p_image"
+              src= ${data.item[0].img1}
+              alt=""
+            />
+          </div>
+          <div class="img-box">
+            <img
+              class="p_image"
+              src=${data.item[0].img2}
+              alt=""
+            />
+          </div>
+          <div class="img-box">
+            <img
+              class="p_image"
+              src=${data.item[0].img3}
+              alt=""
+            />
+          </div>
+          <div class="img-box">
+            <img
+              class="p_image"
+              src=${data.item[0].img4}
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="child-div cart">
+        <h2>${data.name}</h2>
+        <p>
+         ${data.disc}
+        </p>
+        <p>${data.item[0].color}</p>
+        <h3>&#8377 ${data.price}</h3>
+        <p class="mrp">MRP incl. of all taxes</p>
+        <p>S(UK S)</p>
+        <p>M(UK M)</p>
+        <p>L(UK L)</p>
+        <p>XL(UK XL)</p>
+        <p>XXL(UK XXL</p>
+        <button onclick="cart()" class="bag">ADD TO BAG</button>
+      </div>
+`;
+  }
+  display(item);
+  let all_image_container = document.querySelectorAll(".img-box");
+  for (let i = 0; i < all_image_container.length; i++) {
+    all_image_container[i].onclick = function () {
+      showClickedPic(all_image_container, i);
+    };
+  }
+  function showClickedPic(allimg, index) {
+    for (let i = 0; i < allimg.length; i++) {
+      allimg[i].classList.remove("minbox");
+    }
+    allimg[index].classList.add("minbox");
+  }
+
+
+</script>
+<script src="https://kit.fontawesome.com/287d029994.js" crossorigin="anonymous"></script>
+<script src="navOsama.js"></script>
